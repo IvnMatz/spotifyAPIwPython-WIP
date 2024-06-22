@@ -59,3 +59,8 @@ def searchItem(AccessTk, Query, type):
     x = requests.get(url , headers={"Authorization" : AccessTk})
 
     return(x.json())
+
+def getID(AccessTk ,Query, type):
+    response = searchItem(AccessTk, Query, type)
+
+    return response['albums']['items'][0]['id']
