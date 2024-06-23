@@ -15,20 +15,45 @@ def getAccessToken(client_id, secret_id):
     AccessTk = f"Bearer {r['access_token']}"
     return(AccessTk)
 
+# ARTIST RELATED FUNCTIONS
+
 def getArtist(AccessTk, artistID):
     url = f"https://api.spotify.com/v1/artists/{artistID}"
 
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
-    
-def getAlbum(AccessTk, AlbumID):
-    url = f"https://api.spotify.com/v1/albums/{AlbumID}"
+
+def ArtistAlbums(AccessTk, artistID):
+    url = f"https://api.spotify.com/v1/artists/{artistID}/albums"
 
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
 
-def getTrack(AccessTk, TrackID):
+def aTopTracks(AccessTk, artistID):
+    url = f"https://api.spotify.com/v1/artists/{artistID}/top-tracks"
+
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
+def relatedArtists(AccessTk, artistID):
+    url = f"https://api.spotify.com/v1/artists/{artistID}/related-artists"
+
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
+def getAlbum(AccessTk, AlbumID, Market = None):
+    url = f"https://api.spotify.com/v1/albums/{AlbumID}"
+
+    if Market != None:
+        url += f"?Market={Market}"
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
+def getTrack(AccessTk, TrackID, Market=None):
     url = f"https://api.spotify.com/v1/tracks/{TrackID}"
+
+    if Market != None:
+        url += f"?Market={Market}"
 
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
@@ -63,4 +88,4 @@ def searchItem(AccessTk, Query, type):
 def getID(AccessTk ,Query, type):
     response = searchItem(AccessTk, Query, type)
 
-    return response['albums']['items'][0]['id']
+    return response[f'{type}s']['items'][0]['id']
