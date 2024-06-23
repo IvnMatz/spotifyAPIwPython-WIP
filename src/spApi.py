@@ -23,8 +23,11 @@ def getArtist(AccessTk, artistID):
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
 
-def ArtistAlbums(AccessTk, artistID):
+def ArtistAlbums(AccessTk, artistID, Include_groups=None):
     url = f"https://api.spotify.com/v1/artists/{artistID}/albums"
+
+    if Include_groups !=None:
+        url += f"?include_groups{Include_groups}"
 
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
@@ -41,6 +44,8 @@ def relatedArtists(AccessTk, artistID):
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
 
+# ALBUM RELATED FUNCTIONS (GET METHOD)
+
 def getAlbum(AccessTk, AlbumID, Market = None):
     url = f"https://api.spotify.com/v1/albums/{AlbumID}"
 
@@ -48,6 +53,14 @@ def getAlbum(AccessTk, AlbumID, Market = None):
         url += f"?Market={Market}"
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
+
+def getAlbumTracks(AccessTk, AlbumID):
+    url = f"https://api.spotify.com/v1/albums/{AlbumID}/tracks"
+
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
+# TRACK RELATED FUNCTIONS
 
 def getTrack(AccessTk, TrackID, Market=None):
     url = f"https://api.spotify.com/v1/tracks/{TrackID}"
