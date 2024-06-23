@@ -1,4 +1,4 @@
-from spApi import *
+from spApi import getArtist, aTopTracks, ArtistAlbums, relatedArtists
 
 class Artist:
     def __init__(self, AccessTk, ArtistID):
@@ -9,7 +9,7 @@ class Artist:
         self.ID = response['id']
         self.followers = response['followers']['total']
         self.genres = response['genres']
-        self.profURL = response['external_urls']['spotify']
+        self.profileURL = response['external_urls']['spotify']
         self.imgURLs = [response['images'][0]['url'] , response['images'][1]['url'] , response['images'][2]['url'] ]
         self.popularity = response['popularity']
         self.endpoint = response['href']
@@ -27,10 +27,10 @@ class Artist:
         response3 = ArtistAlbums(AccessTk, ArtistID, "album")
 
         self.NoAlbums = len(response3['items'])
-        self.album = {}
+        self.albums = {}
         for i in range(self.NoAlbums):
-            self.album[f'album_{i+1}'] = response3['items'][i]['name']
-            self.album[f'album_{i+1}_id'] = response3['items'][i]['id']
+            self.albums[f'album_{i+1}'] = response3['items'][i]['name']
+            self.albums[f'album_{i+1}_id'] = response3['items'][i]['id']
             
         response4 = relatedArtists(AccessTk, ArtistID)
 

@@ -1,5 +1,7 @@
 import requests
 
+# get petitions
+
 def getAccessToken(client_id, secret_id):
     url = "https://accounts.spotify.com/api/token"
 
