@@ -3,8 +3,6 @@ Cpath()
 from spApi import getAccessToken, getID
 from ArtistClass import Artist
 
-
-
 clientid = "e0bccd7a3f894c1ea9f8bd990bba0d69"
 secret = "8334aa11b7584401bec8b2221260fad4"
 
@@ -14,5 +12,5 @@ ID = getID(token, "Kanye West", "artist")
 
 Kanye = Artist(token, ID)
 
-print(Kanye.genres)
-
+print(Kanye.album['album_1'])
+print(Kanye.album['album_1_id'])
