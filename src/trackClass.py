@@ -1,4 +1,4 @@
-from spApi import getTrack, getAudioAnalysis, getAudioFeatures
+from spApi import getTrack, getAudioFeatures
 
 class Track:
     def __init__(self, AccessTk, trackID):
