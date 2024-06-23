@@ -73,6 +73,16 @@ def getTrack(AccessTk, TrackID, Market=None):
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
 
+def getAudioFeatures(AccessTk, TrackID):
+    url = f"https://api.spotify.com/v1/audio-features/{TrackID}"
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
+def getAudioAnalysis(AccessTk, TrackID):
+    url = f"https://api.spotify.com/v1/audio-analysis/{TrackID}"
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
 def getUser(AccessTk, UserID):
     url = f"https://api.spotify.com/v1/users/{UserID}"
 
@@ -104,3 +114,8 @@ def getID(AccessTk ,Query, type):
     response = searchItem(AccessTk, Query, type)
 
     return response[f'{type}s']['items'][0]['id']
+
+def GenresSeed(AccessTk):
+    url = "https://api.spotify.com/v1/recommendations/available-genre-seeds"
+
+    x = requests.get(url, headers= {"Authorization" : AccessTk})

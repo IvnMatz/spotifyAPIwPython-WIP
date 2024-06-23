@@ -13,18 +13,19 @@ class Album:
         self.type = response['album_type']
         self.NoTracks = response['total_tracks']
         self.URL = response['external_urls']['spotify']
+        self.endpoint = response['href']
         self.restrictions = response['restrictions']['reason']
         self.artists = {}
         for i in range(len(response['artists'])):
-            self.artists[f'artist_{i+1}'] = response['artists']['name']
-            self.artists[f'artist_{i+1}_id'] = response['artists']['name']
+            self.artists[f'artist_{i+1}'] = response['artists'][i]['name']
+            self.artists[f'artist_{i+1}_id'] = response['artists'][i]['name']
 
 
         response2 = getAlbumTracks(AccessTk, AlbumID)
 
         self.tracks = {}
         for i in range(self.NoTracks):
-            self.tracks[f'track_{i+1}'] = response2['items']['name']
-            self.tracks[f'track_{i+1}_id'] = response2['items']['id']
-            self.tracks[f'track_{i+1}_disc_number'] = response2['items']['disc_number']
+            self.tracks[f'track_{i+1}'] = response2['items'][i]['name']
+            self.tracks[f'track_{i+1}_id'] = response2['items'][i]['id']
+            self.tracks[f'track_{i+1}_disc_number'] = response2['items'][i]['disc_number']
             
