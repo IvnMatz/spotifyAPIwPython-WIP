@@ -14,5 +14,6 @@ ID = getID(token, "Kanye West", "artist")
 
 Kanye = Artist(token, ID)
 
+
 print(Kanye.genres)
 
