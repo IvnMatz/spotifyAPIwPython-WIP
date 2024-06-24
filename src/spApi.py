@@ -89,8 +89,16 @@ def getUser(AccessTk, UserID):
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
 
-def getPlaylist(AccessTk, PlaylistID):
+def getPlaylist(AccessTk, PlaylistID, market=None):
     url = f"https://api.spotify.com/v1/users/{PlaylistID}"
+
+    if market != None:
+        url += f"?market={market}"
+    x = requests.get(url, headers={"Authorization" : AccessTk})
+    return(x.json())
+
+def getPlaylistTracks(AccessTk, PlaylistID):
+    url = f"https://api.spotify.com/v1/playlists/{PlaylistID}/tracks"
 
     x = requests.get(url, headers={"Authorization" : AccessTk})
     return(x.json())
